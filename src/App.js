@@ -3,89 +3,107 @@ import './App.css';
 import Nav from './components/Nav';
 import Home from './components/Home';
 import ProductPage from './components/ProductPage';
-import { useState } from 'react';
-import {BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
+// ----------------- * * IMPORTANT!! CETTE VERSION DE App.js UTILISE LES DONNÉES JSON FETCHÉES DE db.json * * -----------------
+// ----------------- * * IMPORTANT!! LE DOSSIER A UN AUTRE FICHIER App.js QUI A DES DONNÉES EN DUR * * -----------------
 
 function App() {
 
-  // --------------------- * * DONNÉS JSON * * ---------------------
+    // --------------------- * * DONNÉES JSON * * ---------------------
 
-  const [produits, setProduits] = useState ([
-    {
-        "id": 1,
-        "nom": "Produit No. UN",
-        "description": "Description courte du Produit No. 1",
-        "prix": "100.00 CAD",
-        "categorie": "Catégorie A"
-    },
-    {
-        "id": 2,
-        "nom": "Produit No. DEUX",
-        "description": "Description courte du Produit No. 2",
-        "prix": "102.50 CAD",
-        "categorie": "Catégorie B"
-    },
-    {
-        "id": 3,
-        "nom": "Produit No. TROIS",
-        "description": "Description courte du Produit No. 3",
-        "prix": "30.00 CAD",
-        "categorie": "Catégorie C"
+    const [produits, setProduits] = useState ([])
+
+
+    // --------------------- * * REST * * ---------------------
+
+    // --------------------- * * Fetch pour obtenir donées json * * ---------------------
+
+    useEffect(()=> {
+        const getProduits = async () => {
+        const produitsFromServer = await fetchProduits('http://localhost:5000/produits')
+        setProduits(produitsFromServer)
+        }       
+        getProduits()
+    }, [])
+  
+    const fetchProduits = async (url) => {
+        const res = await fetch(url)
+        const data = await res.json()
+        return data
     }
-  ])
 
 
-  // --------------------- * * MÉTHODES CRUD * * ---------------------
+    // --------------------- * * Ajouter Donée * * ---------------------
 
-  // --------------------- * * Éffacer * * ---------------------
+    const addProduit = async (prodAjoute) => {
+        
+        const res = await fetch('http://localhost:5000/produits',{
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(prodAjoute)
+        })
 
-  const deleteProduit = async (idCible) => {
+        const newProduit = await res.json() 
 
-    setProduits(produits.filter((produit) => produit.id !==idCible))
-  }
+        setProduits([...produits, newProduit])
+    }
 
 
-  // --------------------- * * Ajouter * * ---------------------
+    // --------------------- * * Modifier Donée Cible * * ---------------------
 
-  const addProduit = (prodAjoute) => {
+    const modifierProduit = async (prodModifie) => {
+        const res = await fetch(`http://localhost:5000/produits/${prodModifie.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify(prodModifie),
+        });
+
+        const data = await res.json();
     
-    const lastId = produits.length > 0 ? produits[produits.length - 1].id : 0
-    const id = lastId + 1
-    const newProduit = {id, ...prodAjoute}
-    setProduits([...produits, newProduit])
-  }
+        setProduits((prevProduits) =>
+            prevProduits.map((prodCible) =>
+                prodCible.id === prodModifie.id ? { ...prodCible, ...prodModifie } : prodCible
+            )
+        )
+    }
 
 
-  // --------------------- * * Modifier * * ---------------------
+    // --------------------- * * Éffacer Donée Cible * * ---------------------
 
-  const modifierProduit = (prodModifie) => {
+    const deleteProduit = async (idCible) => {
+        await fetch(`http://localhost:5000/produits/${idCible}`, {
+        method: 'DELETE',
+        })
+        setProduits(produits.filter((produit) => produit.id !==idCible))
+    }
 
-    setProduits(produits.map(prodCible => 
-      prodCible.id === prodModifie.id ? { ...prodCible, ...prodModifie } : prodCible
-    ));
-};
+  
 
+    //  --------------------- * * RENDER * * ---------------------
 
-  //  ------- * RENDER * -------
+    return (
 
-  return (
+        // --- ** NOTE: What we use as basename is what will come after "localhost:3000" (or whatever port) even when running locally for development ** ---
 
-    // --- ** NOTE: What we use as basename is what will come after "localhost:8000" (or whatever port) even when running locally for development ** ---
+        // <BrowserRouter basename={"/tp2react"}>  
+        <BrowserRouter>      
+            <main>
+                <Nav/>
 
-    // <BrowserRouter basename={"/tp2react"}>  
-    <BrowserRouter>      
-        <main>
-          <Nav/>
-
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/products" element={<ProductPage addProduit={addProduit} produits={produits} deleteProduit={deleteProduit} modifierProduit={modifierProduit} />} />
-          </Routes>
-          
-        </main>     
-    </BrowserRouter>
-  );
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/products" element={<ProductPage addProduit={addProduit} produits={produits} deleteProduit={deleteProduit} modifierProduit={modifierProduit} />} />
+                </Routes>
+            
+            </main>     
+        </BrowserRouter>
+    );
 }
 
-export default App;
+export default App

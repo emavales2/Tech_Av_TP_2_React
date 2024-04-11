@@ -27,6 +27,20 @@
       "prix": "5.00",
       "categorie": "Catégorie A",
       "id": 4
+    },
+    {
+      "nom": "Add Test",
+      "description": "adding test to db",
+      "prix": "4.00",
+      "categorie": "Catégorie B",
+      "id": 5
+    },
+    {
+      "id": 11,
+      "nom": "TestMod3",
+      "description": "",
+      "prix": "",
+      "categorie": "Catégorie B"
     }
   ]
 }

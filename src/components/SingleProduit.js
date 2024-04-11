@@ -4,13 +4,15 @@ import ModifyProduit from './ModifyProduit';
 import BasicModal from './Modal';
 
 
-const SingleProduit = ({ produit, onDelete }) => {
+// const SingleProduit = ({ produit, onDelete }) => {
+const SingleProduit = ({ produit, onDelete, modifierProduit }) => {
 
     const [currentProduit, setCurrentProduit] = useState(produit);
 
     const updateProduit = (modProdInfo) => {
         setCurrentProduit({ ...currentProduit, ...modProdInfo });
     };
+    
     
     return (
         <div className='prod_card'>
@@ -27,13 +29,15 @@ const SingleProduit = ({ produit, onDelete }) => {
                 <ModifyProduit onModify={(modProdInfo) => {
                     // ----- CHECK -----
                     console.log('Mis à jour: SUCCESS!!', modProdInfo);
-
+                    modifierProduit(modProdInfo);
                     updateProduit(modProdInfo);
                 }}
                     currentProdInfo={currentProduit}
                 />
             </BasicModal>        
         </div> 
+
+
     )
 }
 

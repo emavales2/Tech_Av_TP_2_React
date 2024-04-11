@@ -12,13 +12,13 @@ const ModifyProduit = ({ onModify, currentProdInfo }) => {
 
     
     const onSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
         console.log('Submitting modification:', { id: currentProdInfo.id, nom, description, prix, categorie });
 
         if (typeof onModify === 'function') {
             
-            // Transmet les données modifiées au composant parent (SingleProduit) 
+            // Transmet les données modifiées au component parent (SingleProduit) 
             onModify({ id: currentProdInfo.id, nom, description, prix, categorie });
 
             setModSuccess(true);

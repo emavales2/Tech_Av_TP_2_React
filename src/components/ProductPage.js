@@ -4,7 +4,7 @@ import AddProduit from './AddProduit';
 import Button from './Button';
 
 
-const ProductPage = ({ produits, deleteProduit, addProduit }) => {
+const ProductPage = ({ produits, deleteProduit, addProduit, modifierProduit }) => {
 
     const [showAddProduit, setShowAddProduit] = useState(false)
 
@@ -24,7 +24,7 @@ const ProductPage = ({ produits, deleteProduit, addProduit }) => {
             </section> 
             
             <div className='prod_container'>           
-                <ManyProduits produits={produits} onDelete={deleteProduit}/>
+                <ManyProduits produits={produits} onDelete={deleteProduit} modifierProduit={modifierProduit}/>
             </div>
             
         </section>
