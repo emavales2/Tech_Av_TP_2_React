@@ -18,4 +18,4 @@ Button.propTypes = {
     className: PropTypes.string.isRequired
 }
 
-export default Button
+export default Button;

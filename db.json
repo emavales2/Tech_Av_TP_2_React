@@ -1,46 +1,39 @@
 {
-  "produits": [
+  "products": [
     {
-      "id": 1,
-      "nom": "Produit No. UN",
-      "description": "Description courte du Produit No. 1",
-      "prix": "100.00 CAD",
-      "categorie": "Catégorie A"
+      "name": "Earl Grey, 100g",
+      "description": "Fauilles, noir + bergamotte. Creamy",
+      "price": "8.00 CAD",
+      "category": "Thé Noir",
+      "id": 1
     },
     {
-      "id": 2,
-      "nom": "Produit No. DEUX",
-      "description": "Description courte du Produit No. 2",
-      "prix": "102.50 CAD",
-      "categorie": "Catégorie B"
+      "name": "Matcha Ceremoniel, 70g",
+      "description": "Poudre matcha. Creamy & grassy",
+      "price": "12.50 CAD",
+      "category": "Matcha",
+      "id": 2
     },
     {
-      "id": 3,
-      "nom": "Produit No. TROIS",
-      "description": "Description courte du Produit No. 3",
-      "prix": "30.00 CAD",
-      "categorie": "Catégorie C"
+      "name": "Thé à la Menthe,  10 sachets",
+      "description": "Sans caffeine, sachets ronds",
+      "price": "4.50 CAD",
+      "category": "Tisane",
+      "id": 3
     },
     {
-      "nom": "Test",
-      "description": "12345 test",
-      "prix": "5.00",
-      "categorie": "Catégorie A",
+      "name": "English Breakfast, 100 g",
+      "description": "Foncée, fort",
+      "price": "8.00 CAD",
+      "category": "Thé Noir",
       "id": 4
     },
     {
-      "nom": "Add Test",
-      "description": "adding test to db",
-      "prix": "4.00",
-      "categorie": "Catégorie B",
-      "id": 5
-    },
-    {
-      "id": 11,
-      "nom": "TestMod3",
+      "id": 5,
+      "name": "sdagfasd",
       "description": "",
-      "prix": "",
-      "categorie": "Catégorie B"
+      "price": "",
+      "category": "Thé Blanc"
     }
   ]
 }

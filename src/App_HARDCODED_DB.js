@@ -13,27 +13,27 @@ function App() {
 
     // --------------------- * * DONNÉS JSON * * ---------------------
 
-    const [produits, setProduits] = useState ([
+    const [products, setProducts] = useState ([
         {
             "id": 1,
-            "nom": "Produit No. UN",
+            "name": "Produit No. UN",
             "description": "Description courte du Produit No. 1",
-            "prix": "100.00 CAD",
-            "categorie": "Catégorie A"
+            "price": "100.00 CAD",
+            "category": "Catégorie A"
         },
         {
             "id": 2,
-            "nom": "Produit No. DEUX",
+            "name": "Produit No. DEUX",
             "description": "Description courte du Produit No. 2",
-            "prix": "102.50 CAD",
-            "categorie": "Catégorie B"
+            "price": "102.50 CAD",
+            "category": "Catégorie B"
         },
         {
             "id": 3,
-            "nom": "Produit No. TROIS TEST",
+            "name": "Produit No. TROIS TEST",
             "description": "Description courte du Produit No. 3",
-            "prix": "30.00 CAD",
-            "categorie": "Catégorie C"
+            "price": "30.00 CAD",
+            "category": "Catégorie C"
         }
     ])
 
@@ -42,28 +42,28 @@ function App() {
 
   // --------------------- * * Éffacer * * ---------------------
 
-  const deleteProduit = async (idCible) => {
+  const deleteProduct = async (targetId) => {
 
-    setProduits(produits.filter((produit) => produit.id !==idCible))
+    setProducts(products.filter((product) => product.id !==targetId))
   }
 
 
   // --------------------- * * Ajouter * * ---------------------
 
-  const addProduit = (prodAjoute) => {
+  const addProduct = (product) => {
     
-    const lastId = produits.length > 0 ? produits[produits.length - 1].id : 0
+    const lastId = products.length > 0 ? products[products.length - 1].id : 0
     const id = lastId + 1
-    const newProduit = {id, ...prodAjoute}
-    setProduits([...produits, newProduit])
+    const newProduct = {id, ...product}
+    setProducts([...products, newProduct])
   }
 
 
   // --------------------- * * Modifier * * ---------------------
 
-  const modifierProduit = (prodModifie) => {
+  const modifyProduct = (prodModifie) => {
 
-    setProduits(produits.map(prodCible => 
+    setProducts(products.map(prodCible => 
       prodCible.id === prodModifie.id ? { ...prodCible, ...prodModifie } : prodCible
     ));
 };
@@ -73,7 +73,7 @@ function App() {
 
   return (
 
-    // --- ** NOTE: What we use as basename is what will come after "localhost:8000" (or whatever port) even when running locally for development ** ---
+    // --- ** NOTE: What we use as basename is what will come after "localhost:5000" (or whatever port) even when running locally for development ** ---
 
     // <BrowserRouter basename={"/tp2react"}>  
     <BrowserRouter>      
@@ -82,7 +82,7 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/products" element={<ProductPage addProduit={addProduit} produits={produits} deleteProduit={deleteProduit} modifierProduit={modifierProduit} />} />
+            <Route path="/products" element={<ProductPage addProduct={addProduct} products={products} deleteProduct={deleteProduct} modifierProduct={modifierProduct} />} />
           </Routes>
           
         </main>     

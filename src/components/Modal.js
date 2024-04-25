@@ -1,60 +1,23 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-// import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import '../App.css';
 
+"use client";
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-//   bgcolor: 'background.paper',
-    bgcolor: 'peachpuff',
-//   border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
+import { Button, Modal } from 'flowbite-react';
+import { useState } from 'react';
 
-
-export default function BasicModal({ buttonText, children }) {
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true); 
-    
-    const handleClose = () => {
-      console.log('Closing modal...'); 
-      setOpen(false);
-    };  
+export function BasicModal({buttonText, children}) {
+    const [openModal, setOpenModal] = useState(false);
 
     return (
+        <>
+            <Button className="cust_button modal_button" onClick={() => setOpenModal(true)}>{buttonText}</Button>
 
-        <div>
-        {/* NOTE:  */}
-            <Button className='modal_button' onClick={handleOpen}>{buttonText}</Button>
-
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-
-            <Box sx={style}>
-                {/* <Typography id="modal-modal-title" variant="h6" component="h2">
-                    Text in a modal
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                </Typography> */}
-
-                <div className='modal_container'>
-                    {children}
-                </div>
-                </Box>
+            <Modal id="modal" dismissible show={openModal} size="lg" onClose={() => setOpenModal(false)}>
+                <Modal.Header className="bg_coral_lt border-b-0 black" />
+                
+                <Modal.Body className="bg_coral_lt">       
+                    {children}  
+                </Modal.Body>
             </Modal>
-        </div>
+        </>
     );
 }
