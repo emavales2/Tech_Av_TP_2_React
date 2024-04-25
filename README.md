@@ -14,7 +14,7 @@ Teabox is an early-on exploration into React. The app allows the user to perform
 * React-Toastify
 * Illustrator
 
-* 
+## Demo 
 
 https://github.com/emavales2/Tech_Av_TP_2_React/assets/134739116/3204a215-28c2-41b9-a2c1-48a0d5c5c584
 
