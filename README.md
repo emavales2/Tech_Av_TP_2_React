@@ -1,7 +1,7 @@
-![teabox_logo](https://github.com/emavales2/Tech_Av_TP_2_React/assets/134739116/6a6736f6-2092-4f57-ad22-0dc07a0e5ddb) : foray into React :rocket:
+![teabox_logo](https://github.com/emavales2/Tech_Av_TP_2_React/assets/134739116/6a6736f6-2092-4f57-ad22-0dc07a0e5ddb) 
 
 ## Description
-:tea:: Teabox is an early-on exploration into React. The app allows the user to perform basic operations (create, read, update and delete) to curate a tea collection.
+:tea: Teabox is an early-on foray into React. The app allows the user to perform basic operations (create, read, update and delete) to curate a tea collection.
 
 
 ## Stack / Tools
